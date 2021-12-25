@@ -1,5 +1,3 @@
-import apiKey from "./api-key";
-
 let configuration = null;
 
 export const getConfiguration = () => {
@@ -21,7 +19,7 @@ const autoComplete = (query) => {
   }
 
   return fetch(
-    `https://api.themoviedb.org/3/search/keyword?api_key=${apiKey}&query=${query}`
+    `https://api.themoviedb.org/3/search/keyword?api_key=${process.env.REACT_APP_API_KEY}&query=${query}`
   )
     .then((response) => response.json())
     .then((data) =>
