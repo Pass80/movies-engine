@@ -5,7 +5,7 @@ export const getConfiguration = () => {
     return Promise.resolve(configuration);
   }
 
-  return fetch(`https://api.themoviedb.org/3/configuration?api_key=${apiKey}`)
+  return fetch(`https://api.themoviedb.org/3/configuration?api_key=${process.env.REACT_APP_API_KEY}`)
     .then((response) => response.json())
     .then((data) => {
       configuration = data;
@@ -46,9 +46,7 @@ export const getResults = ({ query, sort, year, page }) => {
 
    return Promise.all([
      getConfiguration(),
-     fetch(`https://api.themoviedb.org/3/search/${sort}?api_key=${
-       apiKey
-      }&page=${page || 1}&query= ${query}${year ? "&year" + year : ""}`)
+     fetch(`https://api.themoviedb.org/3/search/${sort}?api_key=${process.env.REACT_APP_API_KEY}&page=${page || 1}&query= ${query}${year ? "&year" + year : ""}`)
     .then((response) => response.json())])
     .then(values => {
      const baseURL = values[0].images.base_url; 
